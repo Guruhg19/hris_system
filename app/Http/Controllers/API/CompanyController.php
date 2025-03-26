@@ -50,7 +50,7 @@ class CompanyController extends Controller
             // Create Company
             $company = Company::create([
                 'name' => $request->name,
-                'logo' => $path
+                'logo' => isset($path) ? $path : null,
             ]);
             if(!$company){
                 throw new Exception('Company not created');
