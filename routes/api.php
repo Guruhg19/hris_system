@@ -6,6 +6,8 @@ use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\TeamController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\CompanyController;
+use App\Http\Controllers\API\EmployeeController;
+use App\Http\Controllers\API\ResponsibilityController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -42,6 +44,29 @@ Route::prefix('role')
         Route::post('', [RoleController::class, 'create'])->name('create');
         Route::post('update/{id}', [RoleController::class, 'update'])->name('update');
         Route::delete('{id}', [RoleController::class, 'destroy'])->name('delete');
+});
+
+
+// Responsibility API
+Route::prefix('responsibility')
+    ->middleware('auth:sanctum')
+    ->name('responsibility.')
+    ->group(function () {   
+        Route::get('', [ResponsibilityController::class, 'fetch'])->name('fetch');
+        Route::post('', [ResponsibilityController::class, 'create'])->name('create');
+        Route::delete('{id}', [ResponsibilityController::class, 'destroy'])->name('delete');
+});
+
+
+// Employee API
+Route::prefix('employee')
+    ->middleware('auth:sanctum')
+    ->name('employee.')
+    ->group(function () {   
+        Route::get('', [EmployeeController::class, 'fetch'])->name('fetch');
+        Route::post('', [EmployeeController::class, 'create'])->name('create');
+        Route::post('update/{id}', [EmployeeController::class, 'update'])->name('update');
+        Route::delete('{id}', [EmployeeController::class, 'destroy'])->name('delete');
 });
 
 
